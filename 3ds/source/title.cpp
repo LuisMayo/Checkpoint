@@ -136,8 +136,8 @@ bool Title::load(u64 _id, FS_MediaType _media, FS_CardType _card)
 
         mShortDescription = StringUtils::removeForbiddenCharacters((char16_t*)smdh->applicationTitles[1].shortDescription);
         mLongDescription  = (char16_t*)smdh->applicationTitles[1].longDescription;
-        mSavePath         = StringUtils::UTF8toUTF16("/3ds/Checkpoint/saves/") + StringUtils::UTF8toUTF16(unique) + mShortDescription;
-        mExtdataPath      = StringUtils::UTF8toUTF16("/3ds/Checkpoint/extdata/") + StringUtils::UTF8toUTF16(unique) + mShortDescription;
+        mSavePath         = StringUtils::UTF8toUTF16("/3ds/Identity/saves/") + StringUtils::UTF8toUTF16(unique) + mShortDescription;
+        mExtdataPath      = StringUtils::UTF8toUTF16("/3ds/Identity/extdata/") + StringUtils::UTF8toUTF16(unique) + mShortDescription;
         AM_GetTitleProductCode(mMedia, mId, productCode);
 
         mAccessibleSave    = Archive::accessible(mediaType(), lowId(), highId());
@@ -203,7 +203,7 @@ bool Title::load(u64 _id, FS_MediaType _media, FS_CardType _card)
 
         mShortDescription = StringUtils::removeForbiddenCharacters(StringUtils::UTF8toUTF16(_cardTitle));
         mLongDescription  = mShortDescription;
-        mSavePath         = StringUtils::UTF8toUTF16("/3ds/Checkpoint/saves/") + StringUtils::UTF8toUTF16(_gameCode) + StringUtils::UTF8toUTF16(" ") +
+        mSavePath         = StringUtils::UTF8toUTF16("/3ds/Identity/saves/") + StringUtils::UTF8toUTF16(_gameCode) + StringUtils::UTF8toUTF16(" ") +
                     mShortDescription;
         mExtdataPath = mSavePath;
         memset(productCode, 0, 16);
@@ -491,8 +491,8 @@ static bool validId(u64 id)
 
 void loadTitles(bool forceRefresh)
 {
-    static const std::u16string savecachePath    = StringUtils::UTF8toUTF16("/3ds/Checkpoint/fullsavecache");
-    static const std::u16string extdatacachePath = StringUtils::UTF8toUTF16("/3ds/Checkpoint/fullextdatacache");
+    static const std::u16string savecachePath    = StringUtils::UTF8toUTF16("/3ds/Identity/fullsavecache");
+    static const std::u16string extdatacachePath = StringUtils::UTF8toUTF16("/3ds/Identity/fullextdatacache");
 
     // on refreshing
     titleSaves.clear();
@@ -503,7 +503,7 @@ void loadTitles(bool forceRefresh)
     u8 hash[SHA256_BLOCK_SIZE];
     calculateTitleDBHash(hash);
 
-    std::u16string titlesHashPath = StringUtils::UTF8toUTF16("/3ds/Checkpoint/titles.sha");
+    std::u16string titlesHashPath = StringUtils::UTF8toUTF16("/3ds/Identity/titles.sha");
     if (!io::fileExists(Archive::sdmc(), titlesHashPath) || !io::fileExists(Archive::sdmc(), savecachePath) ||
         !io::fileExists(Archive::sdmc(), extdatacachePath)) {
         // create title list sha256 hash file if it doesn't exist in the working directory
@@ -794,13 +794,13 @@ static void exportTitleListCache(std::vector<Title>& list, const std::u16string&
 
 static void importTitleListCache(void)
 {
-    FSStream inputsaves(Archive::sdmc(), StringUtils::UTF8toUTF16("/3ds/Checkpoint/fullsavecache"), FS_OPEN_READ);
+    FSStream inputsaves(Archive::sdmc(), StringUtils::UTF8toUTF16("/3ds/Identity/fullsavecache"), FS_OPEN_READ);
     u32 sizesaves  = inputsaves.size() / ENTRYSIZE;
     u8* cachesaves = new u8[inputsaves.size()];
     inputsaves.read(cachesaves, inputsaves.size());
     inputsaves.close();
 
-    FSStream inputextdatas(Archive::sdmc(), StringUtils::UTF8toUTF16("/3ds/Checkpoint/fullextdatacache"), FS_OPEN_READ);
+    FSStream inputextdatas(Archive::sdmc(), StringUtils::UTF8toUTF16("/3ds/Identity/fullextdatacache"), FS_OPEN_READ);
     u32 sizeextdatas  = inputextdatas.size() / ENTRYSIZE;
     u8* cacheextdatas = new u8[inputextdatas.size()];
     inputextdatas.read(cacheextdatas, inputextdatas.size());

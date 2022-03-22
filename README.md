@@ -31,10 +31,10 @@ Checkpoint relies on the following folders to store the files it generates. Note
 
 ### 3DS
 
-* **`sdmc:/3ds/Checkpoint`**: root path
-* **`sdmc:/3ds/Checkpoint/config.json`**: custom configuration file
-* **`sdmc:/3ds/Checkpoint/saves/<unique id> <game title>`**: root path for all the save backups for a generic game
-* **`sdmc:/3ds/Checkpoint/extdata/<unique id> <game title>`**: root path for all the extdata backups for a generic game
+* **`sdmc:/3ds/Identity`**: root path
+* **`sdmc:/3ds/Identity/config.json`**: custom configuration file
+* **`sdmc:/3ds/Identity/saves/<unique id> <game title>`**: root path for all the save backups for a generic game
+* **`sdmc:/3ds/Identity/extdata/<unique id> <game title>`**: root path for all the extdata backups for a generic game
 
 ### Switch
 

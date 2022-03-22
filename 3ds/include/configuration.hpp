@@ -66,7 +66,7 @@ private:
     std::unordered_set<u64> mFilterIds, mFavoriteIds;
     std::unordered_map<u64, std::vector<std::u16string>> mAdditionalSaveFolders, mAdditionalExtdataFolders;
     bool mNandSaves, mScanCard;
-    std::string BASEPATH = "/3ds/Checkpoint/config.json";
+    std::string BASEPATH = "/3ds/Identity/config.json";
 };
 
 #endif

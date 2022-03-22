@@ -29,8 +29,8 @@
 CheatManager::CheatManager(void)
 {
     mCheats = nullptr;
-    if (io::fileExists("/3ds/Checkpoint/cheats.json")) {
-        const std::string path = "/3ds/Checkpoint/cheats.json";
+    if (io::fileExists("/3ds/Identity/cheats.json")) {
+        const std::string path = "/3ds/Identity/cheats.json";
         FILE* in               = fopen(path.c_str(), "rt");
         if (in != NULL) {
             mCheats = std::make_shared<nlohmann::json>(nlohmann::json::parse(in, nullptr, false));

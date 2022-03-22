@@ -55,9 +55,9 @@ Result servicesInit(void)
     ATEXIT(Archive::exit);
 
     mkdir("sdmc:/3ds", 777);
-    mkdir("sdmc:/3ds/Checkpoint", 777);
-    mkdir("sdmc:/3ds/Checkpoint/saves", 777);
-    mkdir("sdmc:/3ds/Checkpoint/extdata", 777);
+    mkdir("sdmc:/3ds/Identity", 777);
+    mkdir("sdmc:/3ds/Identity/saves", 777);
+    mkdir("sdmc:/3ds/Identity/extdata", 777);
     mkdir("sdmc:/cheats", 777);
 
     Logger::getInstance().log(Logger::INFO, "Checkpoint loading started...");
